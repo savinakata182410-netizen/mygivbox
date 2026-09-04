@@ -308,4 +308,123 @@ def collect_channel(source):
     url = f"https://t.me/s/{source}"
 
     try:
-        response = requests
+        response = requests.get(
+            url,
+            headers=HEADERS,
+            timeout=30
+        )
+
+        response.raise_for_status()
+
+    except Exception as error:
+        print(f"[ERROR] @{source}: {error}")
+        return []
+
+    soup = BeautifulSoup(
+        response.text,
+        "html.parser"
+    )
+
+    result = []
+
+    messages = soup.select(
+        ".tgme_widget_message"
+    )
+
+    for message in messages:
+        text_node = message.select_one(
+            ".tgme_widget_message_text"
+        )
+
+        if not text_node:
+            continue
+
+        text = text_node.get_text(
+            "\n",
+            strip=True
+        )
+
+        if not text:
+            continue
+
+        if not is_giveaway(text):
+            continue
+
+        if is_excluded(text):
+            continue
+
+        if not is_russia(text, source):
+            continue
+
+        end_date = parse_date(text)
+
+        if not end_date:
+            continue
+
+        if end_date < TODAY:
+            continue
+
+        post_url = get_post_url(message)
+
+        if not post_url:
+            continue
+
+        category = detect_category(text)
+
+        result.append({
+            "title": make_title(text),
+            "category": category,
+            "category_name": CATEGORY_NAMES.get(
+                category,
+                CATEGORY_NAMES["other"]
+            ),
+            "end_date": end_date.isoformat(),
+            "source": "@" + source,
+            "url": post_url,
+        })
+
+    return result
+
+
+all_giveaways = []
+
+for source in SOURCES:
+    print(f"[INFO] Проверяем @{source}")
+
+    items = collect_channel(source)
+
+    print(
+        f"[INFO] @{source}: найдено {len(items)}"
+    )
+
+    all_giveaways.extend(items)
+
+
+unique = {}
+
+for item in all_giveaways:
+    unique[item["url"]] = item
+
+all_giveaways = list(unique.values())
+
+all_giveaways.sort(
+    key=lambda item: item["end_date"]
+)
+
+with open(
+    "giveaways.json",
+    "w",
+    encoding="utf-8"
+) as file:
+    json.dump(
+        all_giveaways,
+        file,
+        ensure_ascii=False,
+        indent=2
+    )
+
+print()
+print(
+    f"[DONE] Всего актуальных розыгрышей: "
+    f"{len(all_giveaways)}"
+)
