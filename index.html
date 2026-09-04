@@ -13,33 +13,35 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f3f5f7;
-      color: #202124;
+      background: #f4f6f8;
+      color: #222;
     }
 
-    .header {
-      background: #2481cc;
-      color: white;
-      padding: 22px 18px;
-      border-radius: 0 0 24px 24px;
+    header {
+      padding: 22px 16px 14px;
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    .header h1 {
+    h1 {
       margin: 0;
-      font-size: 27px;
+      font-size: 26px;
     }
 
-    .header p {
-      margin: 6px 0 0;
-      opacity: .9;
+    .subtitle {
+      margin-top: 5px;
+      color: #777;
+      font-size: 14px;
     }
 
-    .search {
-      margin-top: 16px;
+    #search {
       width: 100%;
+      margin-top: 15px;
       padding: 13px 15px;
-      border: none;
-      border-radius: 13px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
       font-size: 16px;
       outline: none;
     }
@@ -48,99 +50,84 @@
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding: 15px 16px 5px;
+      padding-top: 12px;
     }
 
     .category {
-      white-space: nowrap;
-      border: none;
-      background: white;
-      padding: 10px 14px;
+      border: 0;
+      padding: 9px 14px;
       border-radius: 20px;
-      font-size: 14px;
+      background: #eee;
+      white-space: nowrap;
+      cursor: pointer;
     }
 
     .category.active {
-      background: #2481cc;
+      background: #222;
       color: white;
     }
 
-    .content {
-      padding: 12px 16px 25px;
-    }
-
-    .section-title {
-      font-size: 21px;
-      font-weight: bold;
-      margin: 10px 0 14px;
+    main {
+      padding: 15px;
     }
 
     .card {
       background: white;
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.06);
-    }
-
-    .badge {
-      display: inline-block;
-      background: #e8f3ff;
-      color: #2481cc;
-      padding: 5px 9px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 9px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
     }
 
     .card h2 {
-      margin: 0 0 7px;
-      font-size: 19px;
+      margin: 0 0 8px;
+      font-size: 18px;
     }
 
-    .prize {
-      font-size: 17px;
-      font-weight: bold;
-      margin: 7px 0;
+    .source {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 12px;
+      word-break: break-all;
     }
 
-    .info {
-      color: #666;
+    .buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .participate,
+    .done {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 13px;
+      cursor: pointer;
       font-size: 14px;
-      line-height: 1.5;
     }
 
     .participate {
-      display: block;
-      width: 100%;
-      border: none;
-      border-radius: 12px;
-      padding: 13px;
-      margin-top: 12px;
-      background: #2481cc;
+      background: #222;
       color: white;
-      font-size: 16px;
-      font-weight: bold;
       text-decoration: none;
-      text-align: center;
     }
 
-    .participated {
-      display: block;
-      width: 100%;
-      border: none;
-      border-radius: 12px;
-      padding: 11px;
-      margin-top: 8px;
-      background: #eef0f2;
-      color: #555;
-      font-size: 14px;
+    .done {
+      background: #eee;
+    }
+
+    .done.active {
+      background: #dff5e5;
     }
 
     .empty {
       text-align: center;
-      padding: 35px 15px;
+      padding: 40px 10px;
+      color: #777;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px 10px;
       color: #777;
     }
   </style>
@@ -148,150 +135,197 @@
 
 <body>
 
-  <div class="header">
-    <h1>🎁 MyGivBox</h1>
-    <p>Каталог Telegram-розыгрышей</p>
+<header>
+  <h1>🎁 MyGivBox</h1>
+  <div class="subtitle">Каталог Telegram-розыгрышей</div>
 
-    <input
-      class="search"
-      id="search"
-      type="text"
-      placeholder="🔎 Найти розыгрыш..."
-    >
-  </div>
+  <input
+    id="search"
+    type="search"
+    placeholder="🔎 Найти розыгрыш..."
+  >
 
   <div class="categories">
-    <button class="category active" onclick="filterCategory('all', this)">Все</button>
-    <button class="category" onclick="filterCategory('new', this)">🆕 Новые</button>
-    <button class="category" onclick="filterCategory('money', this)">💰 Деньги</button>
-    <button class="category" onclick="filterCategory('tech', this)">📱 Техника</button>
-    <button class="category" onclick="filterCategory('stars', this)">⭐ Stars</button>
-    <button class="category" onclick="filterCategory('premium', this)">💎 Premium</button>
-    <button class="category" onclick="filterCategory('gift', this)">🎁 Подарки</button>
+    <button class="category active" data-category="all">Все</button>
+    <button class="category" data-category="stars">⭐ Stars</button>
+    <button class="category" data-category="premium">💎 Premium</button>
+    <button class="category" data-category="money">💰 Деньги</button>
+    <button class="category" data-category="tech">📱 Техника</button>
   </div>
+</header>
 
-  <div class="content">
-
-    <div class="section-title">🔥 Актуальные розыгрыши</div>
-
-    <div id="giveaways">
-
-      <div class="card giveaway" data-category="tech" data-search="iphone телефон техника">
-        <div class="badge">📱 Техника</div>
-        <h2>Розыгрыш iPhone</h2>
-        <div class="prize">🎁 iPhone</div>
-        <div class="info">
-          Условия: подписка на канал<br>
-          ⏰ Завершение: скоро
-        </div>
-
-        <a class="participate" href="https://t.me/" target="_blank">
-          Участвовать
-        </a>
-
-        <button class="participated" onclick="markParticipated(this)">
-          ✓ Я участвовал
-        </button>
-      </div>
-
-
-      <div class="card giveaway" data-category="money" data-search="деньги рубли приз">
-        <div class="badge">💰 Деньги</div>
-        <h2>Денежный розыгрыш</h2>
-        <div class="prize">💵 Денежный приз</div>
-        <div class="info">
-          Условия: подписка и выполнение заданий<br>
-          ⏰ Завершение: скоро
-        </div>
-
-        <a class="participate" href="https://t.me/" target="_blank">
-          Участвовать
-        </a>
-
-        <button class="participated" onclick="markParticipated(this)">
-          ✓ Я участвовал
-        </button>
-      </div>
-
-
-      <div class="card giveaway" data-category="stars" data-search="telegram stars звезды">
-        <div class="badge">⭐ Telegram Stars</div>
-        <h2>Розыгрыш Stars</h2>
-        <div class="prize">⭐ Telegram Stars</div>
-        <div class="info">
-          Условия: подписка на канал<br>
-          ⏰ Завершение: скоро
-        </div>
-
-        <a class="participate" href="https://t.me/" target="_blank">
-          Участвовать
-        </a>
-
-        <button class="participated" onclick="markParticipated(this)">
-          ✓ Я участвовал
-        </button>
-      </div>
-
-    </div>
-
-    <div class="empty" id="empty" style="display:none;">
-      😔 Ничего не найдено
-    </div>
-
+<main>
+  <div id="list" class="loading">
+    Загружаем розыгрыши… 🎁
   </div>
+</main>
 
+<script>
+  let giveaways = [];
+  let currentCategory = "all";
 
-  <script>
-    let currentCategory = "all";
+  const list = document.getElementById("list");
+  const search = document.getElementById("search");
 
-    function filterCategory(category, button) {
-      currentCategory = category;
+  function detectCategory(text) {
+    const value = text.toLowerCase();
 
-      document.querySelectorAll(".category").forEach(function(btn) {
-        btn.classList.remove("active");
-      });
+    if (
+      value.includes("star") ||
+      value.includes("звезд") ||
+      value.includes("stars")
+    ) {
+      return "stars";
+    }
+
+    if (
+      value.includes("premium") ||
+      value.includes("премиум")
+    ) {
+      return "premium";
+    }
+
+    if (
+      value.includes("руб") ||
+      value.includes("₽") ||
+      value.includes("деньг") ||
+      value.includes("cash")
+    ) {
+      return "money";
+    }
+
+    if (
+      value.includes("iphone") ||
+      value.includes("айфон") ||
+      value.includes("телефон") ||
+      value.includes("техник")
+    ) {
+      return "tech";
+    }
+
+    return "all";
+  }
+
+  function render() {
+    const query = search.value.toLowerCase().trim();
+
+    const filtered = giveaways.filter(item => {
+      const text = (item.title || "").toLowerCase();
+      const category = detectCategory(text);
+
+      const categoryOk =
+        currentCategory === "all" ||
+        category === currentCategory;
+
+      const searchOk =
+        !query ||
+        text.includes(query);
+
+      return categoryOk && searchOk;
+    });
+
+    if (filtered.length === 0) {
+      list.innerHTML = `
+        <div class="empty">
+          😔 Розыгрышей не найдено
+        </div>
+      `;
+      return;
+    }
+
+    list.innerHTML = filtered.map((item, index) => `
+      <div class="card">
+        <h2>🎁 ${escapeHtml(item.title || "Розыгрыш")}</h2>
+
+        <div class="source">
+          ${escapeHtml(item.url || "")}
+        </div>
+
+        <div class="buttons">
+          <a
+            class="participate"
+            href="${escapeAttr(item.url || "#")}"
+            target="_blank"
+          >
+            Участвовать
+          </a>
+
+          <button
+            class="done"
+            onclick="markDone(${index})"
+          >
+            ✓ Я участвовал
+          </button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function markDone(index) {
+    const buttons = document.querySelectorAll(".done");
+    if (buttons[index]) {
+      buttons[index].classList.toggle("active");
+      buttons[index].textContent =
+        buttons[index].classList.contains("active")
+          ? "✓ Участвовал"
+          : "✓ Я участвовал";
+    }
+  }
+
+  function escapeHtml(text) {
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function escapeAttr(text) {
+    return String(text)
+      .replaceAll('"', "&quot;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+  }
+
+  fetch("giveaways.json?time=" + Date.now())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Не удалось загрузить giveaways.json");
+      }
+
+      return response.json();
+    })
+    .then(data => {
+      giveaways = Array.isArray(data) ? data : [];
+      render();
+    })
+    .catch(error => {
+      console.error(error);
+
+      list.innerHTML = `
+        <div class="empty">
+          ⚠️ Не удалось загрузить розыгрыши.<br><br>
+          Попробуйте открыть приложение немного позже.
+        </div>
+      `;
+    });
+
+  search.addEventListener("input", render);
+
+  document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", () => {
+      document
+        .querySelectorAll(".category")
+        .forEach(item => item.classList.remove("active"));
 
       button.classList.add("active");
+      currentCategory = button.dataset.category;
 
-      applyFilters();
-    }
-
-    document.getElementById("search").addEventListener("input", applyFilters);
-
-    function applyFilters() {
-      const search = document.getElementById("search").value.toLowerCase();
-      const cards = document.querySelectorAll(".giveaway");
-      let visible = 0;
-
-      cards.forEach(function(card) {
-        const category = card.dataset.category;
-        const text = card.dataset.search;
-
-        const categoryMatch =
-          currentCategory === "all" ||
-          category === currentCategory;
-
-        const searchMatch =
-          text.includes(search);
-
-        if (categoryMatch && searchMatch) {
-          card.style.display = "block";
-          visible++;
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      document.getElementById("empty").style.display =
-        visible === 0 ? "block" : "none";
-    }
-
-    function markParticipated(button) {
-      button.innerText = "✓ Участие отмечено";
-      button.style.background = "#dff5e5";
-      button.style.color = "#24834b";
-    }
-  </script>
+      render();
+    });
+  });
+</script>
 
 </body>
 </html>
