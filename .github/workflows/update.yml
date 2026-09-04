@@ -1,0 +1,34 @@
+name: Update giveaways
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install packages
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Collect giveaways
+        run: python scripts/collect.py
+
+      - name: Save changes
+        run: |
+          git config user.name "MyGivBox Bot"
+          git config user.email "actions@github.com"
+          git add giveaways.json
+          git diff --cached --quiet || git commit -m "Update giveaways"
+          git push
