@@ -1,296 +1,219 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyGivBox</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <style>
-    * { box-sizing: border-box; }
+<title>MyGivBox — Розыгрыши</title>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #222;
-    }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    header {
-      background: white;
-      padding: 20px 15px 12px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f7;
+    color: #171717;
+}
 
-    h1 {
-      margin: 0;
-      font-size: 26px;
-    }
+header {
+    padding: 20px 16px 10px;
+    text-align: center;
+}
 
-    .subtitle {
-      color: #777;
-      margin-top: 5px;
-      font-size: 14px;
-    }
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+}
 
-    #search {
-      width: 100%;
-      margin-top: 15px;
-      padding: 13px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      font-size: 16px;
-    }
+.subtitle {
+    margin-top: 5px;
+    color: #777;
+    font-size: 14px;
+}
 
-    .categories {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-top: 12px;
-    }
+.categories {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 14px;
+    scrollbar-width: none;
+}
 
-    .category {
-      border: 0;
-      padding: 9px 14px;
-      border-radius: 20px;
-      background: #eee;
-      white-space: nowrap;
-    }
+.categories::-webkit-scrollbar {
+    display: none;
+}
 
-    .category.active {
-      background: #222;
-      color: white;
-    }
+.category {
+    flex: 0 0 auto;
+    border: 0;
+    background: white;
+    border-radius: 20px;
+    padding: 9px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
 
-    main {
-      padding: 15px;
-    }
+.category.active {
+    background: #111;
+    color: white;
+}
 
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    }
+#status {
+    padding: 5px 16px 12px;
+    color: #777;
+    font-size: 13px;
+}
 
-    .badge {
-      display: inline-block;
-      background: #eee;
-      padding: 5px 9px;
-      border-radius: 8px;
-      font-size: 12px;
-      margin-bottom: 9px;
-    }
+#list {
+    padding: 0 12px 30px;
+}
 
-    .card h2 {
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
 
-    .date {
-      color: #666;
-      font-size: 13px;
-      margin-bottom: 13px;
-    }
+.card-category {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 7px;
+}
 
-    .source {
-      color: #999;
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
+.card-title {
+    font-size: 17px;
+    line-height: 1.35;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
 
-    .participate {
-      display: inline-block;
-      background: #222;
-      color: white;
-      text-decoration: none;
-      padding: 11px 15px;
-      border-radius: 10px;
-    }
+.card-info {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+}
 
-    .empty {
-      text-align: center;
-      color: #777;
-      padding: 40px 10px;
-    }
-  </style>
+.end {
+    font-weight: 700;
+    color: #d35400;
+}
+
+.button {
+    display: block;
+    width: 100%;
+    margin-top: 13px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #111;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.empty {
+    text-align: center;
+    padding: 50px 20px;
+    color: #777;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #777;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>🎁 MyGivBox</h1>
-  <div class="subtitle">Деньги • Техника • Игры • Крипто</div>
-
-  <input
-    id="search"
-    type="search"
-    placeholder="🔎 Найти розыгрыш..."
-  >
-
-  <div class="categories">
-    <button class="category active" data-category="all">Все</button>
-    <button class="category" data-category="money">💰 Деньги</button>
-    <button class="category" data-category="tech">📱 Техника</button>
-    <button class="category" data-category="games">🎮 Игры</button>
-    <button class="category" data-category="crypto">💎 Крипто</button>
-  </div>
+    <div class="logo">🎁 MyGivBox</div>
+    <div class="subtitle">Актуальные розыгрыши по России</div>
 </header>
 
-<main>
-  <div id="list" class="empty">
-    Загружаем розыгрыши… 🎁
-  </div>
-</main>
+<div class="categories">
+
+    <button class="category active" data-category="all">
+        Все
+    </button>
+
+    <button class="category" data-category="money">
+        💰 Деньги
+    </button>
+
+    <button class="category" data-category="tech">
+        📱 Техника
+    </button>
+
+    <button class="category" data-category="cosmetics">
+        💄 Косметика
+    </button>
+
+    <button class="category" data-category="clothes">
+        👗 Одежда
+    </button>
+
+    <button class="category" data-category="home">
+        🏠 Дом
+    </button>
+
+    <button class="category" data-category="games">
+        🎮 Игры
+    </button>
+
+    <button class="category" data-category="auto">
+        🚗 Авто
+    </button>
+
+    <button class="category" data-category="food">
+        🍔 Еда
+    </button>
+
+    <button class="category" data-category="certificates">
+        🎟️ Сертификаты
+    </button>
+
+    <button class="category" data-category="crypto">
+        🪙 Crypto
+    </button>
+
+    <button class="category" data-category="other">
+        🎁 Другое
+    </button>
+
+</div>
+
+<div id="status">
+    Загружаем розыгрыши...
+</div>
+
+<div id="list">
+    <div class="loading">
+        ⏳ Загрузка...
+    </div>
+</div>
 
 <script>
-  let giveaways = [];
-  let currentCategory = "all";
 
-  const list = document.getElementById("list");
-  const search = document.getElementById("search");
+let giveaways = [];
+let currentCategory = "all";
 
-  const categoryNames = {
-    money: "💰 Деньги",
-    tech: "📱 Техника",
-    games: "🎮 Игры",
-    crypto: "💎 Крипто"
-  };
+function formatDate(value) {
 
-  function formatDate(date) {
-    if (!date) return "Дата окончания не указана";
-
-    const d = new Date(date);
-
-    if (isNaN(d.getTime())) {
-      return "Дата окончания не указана";
+    if (!value) {
+        return "";
     }
 
-    return "⏰ До " + d.toLocaleDateString("ru-RU");
-  }
+    const parts = value.split("-");
 
-  function render() {
-    const query = search.value.toLowerCase().trim();
-
-    const filtered = giveaways.filter(item => {
-      const title = String(item.title || "").toLowerCase();
-
-      const categoryOk =
-        currentCategory === "all" ||
-        item.category === currentCategory;
-
-      const searchOk =
-        !query || title.includes(query);
-
-      return categoryOk && searchOk;
-    });
-
-    if (!filtered.length) {
-      list.innerHTML = `
-        <div class="empty">
-          😔 Подходящих розыгрышей пока нет
-        </div>
-      `;
-      return;
+    if (parts.length !== 3) {
+        return value;
     }
 
-    list.innerHTML = filtered.map(item => {
-      const category = categoryNames[item.category] || "🎁 Розыгрыш";
-
-      return `
-        <div class="card">
-          <div class="badge">${category}</div>
-
-          <h2>${escapeHtml(item.title || "Розыгрыш")}</h2>
-
-          <div class="date">
-            ${formatDate(item.end_date)}
-          </div>
-
-          <div class="source">
-            Источник: ${escapeHtml(item.source || "Публичный источник")}
-          </div>
-
-          <a
-            class="participate"
-            href="${escapeAttr(item.url || "#")}"
-            target="_blank"
-          >
-            Участвовать
-          </a>
-        </div>
-      `;
-    }).join("");
-  }
-
-  function escapeHtml(text) {
-    return String(text)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function escapeAttr(text) {
-    return String(text)
-      .replaceAll('"', "&quot;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;");
-  }
-
-  fetch("giveaways.json?time=" + Date.now())
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Ошибка загрузки");
-      }
-      return response.json();
-    })
-    .then(data => {
-      giveaways = Array.isArray(data) ? data : [];
-
-      // Ближайшие даты окончания — сверху
-      giveaways.sort((a, b) => {
-        const dateA = a.end_date
-          ? new Date(a.end_date).getTime()
-          : Infinity;
-
-        const dateB = b.end_date
-          ? new Date(b.end_date).getTime()
-          : Infinity;
-
-        return dateA - dateB;
-      });
-
-      render();
-    })
-    .catch(error => {
-      console.error(error);
-
-      list.innerHTML = `
-        <div class="empty">
-          ⚠️ Не удалось загрузить розыгрыши
-        </div>
-      `;
-    });
-
-  search.addEventListener("input", render);
-
-  document.querySelectorAll(".category").forEach(button => {
-    button.addEventListener("click", () => {
-      document
-        .querySelectorAll(".category")
-        .forEach(b => b.classList.remove("active"));
-
-      button.classList.add("active");
-      currentCategory = button.dataset.category;
-
-      render();
-    });
-  });
-</script>
-
-</body>
-</html>
+    return parts
