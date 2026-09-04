@@ -6,9 +6,7 @@
   <title>MyGivBox</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -18,8 +16,8 @@
     }
 
     header {
-      padding: 22px 16px 14px;
       background: white;
+      padding: 20px 15px 12px;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -31,19 +29,18 @@
     }
 
     .subtitle {
-      margin-top: 5px;
       color: #777;
+      margin-top: 5px;
       font-size: 14px;
     }
 
     #search {
       width: 100%;
       margin-top: 15px;
-      padding: 13px 15px;
+      padding: 13px;
       border: 1px solid #ddd;
       border-radius: 12px;
       font-size: 16px;
-      outline: none;
     }
 
     .categories {
@@ -59,7 +56,6 @@
       border-radius: 20px;
       background: #eee;
       white-space: nowrap;
-      cursor: pointer;
     }
 
     .category.active {
@@ -79,56 +75,45 @@
       box-shadow: 0 2px 8px rgba(0,0,0,.06);
     }
 
+    .badge {
+      display: inline-block;
+      background: #eee;
+      padding: 5px 9px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
     .card h2 {
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       font-size: 18px;
     }
 
-    .source {
-      color: #777;
+    .date {
+      color: #666;
       font-size: 13px;
+      margin-bottom: 13px;
+    }
+
+    .source {
+      color: #999;
+      font-size: 12px;
       margin-bottom: 12px;
-      word-break: break-all;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 8px;
-    }
-
-    .participate,
-    .done {
-      border: 0;
-      border-radius: 10px;
-      padding: 11px 13px;
-      cursor: pointer;
-      font-size: 14px;
     }
 
     .participate {
+      display: inline-block;
       background: #222;
       color: white;
       text-decoration: none;
-    }
-
-    .done {
-      background: #eee;
-    }
-
-    .done.active {
-      background: #dff5e5;
+      padding: 11px 15px;
+      border-radius: 10px;
     }
 
     .empty {
       text-align: center;
-      padding: 40px 10px;
       color: #777;
-    }
-
-    .loading {
-      text-align: center;
       padding: 40px 10px;
-      color: #777;
     }
   </style>
 </head>
@@ -137,7 +122,7 @@
 
 <header>
   <h1>🎁 MyGivBox</h1>
-  <div class="subtitle">Каталог Telegram-розыгрышей</div>
+  <div class="subtitle">Деньги • Техника • Игры • Крипто</div>
 
   <input
     id="search"
@@ -147,15 +132,15 @@
 
   <div class="categories">
     <button class="category active" data-category="all">Все</button>
-    <button class="category" data-category="stars">⭐ Stars</button>
-    <button class="category" data-category="premium">💎 Premium</button>
     <button class="category" data-category="money">💰 Деньги</button>
     <button class="category" data-category="tech">📱 Техника</button>
+    <button class="category" data-category="games">🎮 Игры</button>
+    <button class="category" data-category="crypto">💎 Крипто</button>
   </div>
 </header>
 
 <main>
-  <div id="list" class="loading">
+  <div id="list" class="empty">
     Загружаем розыгрыши… 🎁
   </div>
 </main>
@@ -167,81 +152,67 @@
   const list = document.getElementById("list");
   const search = document.getElementById("search");
 
-  function detectCategory(text) {
-    const value = text.toLowerCase();
+  const categoryNames = {
+    money: "💰 Деньги",
+    tech: "📱 Техника",
+    games: "🎮 Игры",
+    crypto: "💎 Крипто"
+  };
 
-    if (
-      value.includes("star") ||
-      value.includes("звезд") ||
-      value.includes("stars")
-    ) {
-      return "stars";
+  function formatDate(date) {
+    if (!date) return "Дата окончания не указана";
+
+    const d = new Date(date);
+
+    if (isNaN(d.getTime())) {
+      return "Дата окончания не указана";
     }
 
-    if (
-      value.includes("premium") ||
-      value.includes("премиум")
-    ) {
-      return "premium";
-    }
-
-    if (
-      value.includes("руб") ||
-      value.includes("₽") ||
-      value.includes("деньг") ||
-      value.includes("cash")
-    ) {
-      return "money";
-    }
-
-    if (
-      value.includes("iphone") ||
-      value.includes("айфон") ||
-      value.includes("телефон") ||
-      value.includes("техник")
-    ) {
-      return "tech";
-    }
-
-    return "all";
+    return "⏰ До " + d.toLocaleDateString("ru-RU");
   }
 
   function render() {
     const query = search.value.toLowerCase().trim();
 
     const filtered = giveaways.filter(item => {
-      const text = (item.title || "").toLowerCase();
-      const category = detectCategory(text);
+      const title = String(item.title || "").toLowerCase();
 
       const categoryOk =
         currentCategory === "all" ||
-        category === currentCategory;
+        item.category === currentCategory;
 
       const searchOk =
-        !query ||
-        text.includes(query);
+        !query || title.includes(query);
 
       return categoryOk && searchOk;
     });
 
-    if (filtered.length === 0) {
+    if (!filtered.length) {
       list.innerHTML = `
         <div class="empty">
-          😔 Розыгрышей не найдено
+          😔 Подходящих розыгрышей пока нет
         </div>
       `;
       return;
     }
 
-    list.innerHTML = filtered.map((item, index) => `
-      <div class="card">
-        <h2>🎁 ${escapeHtml(item.title || "Розыгрыш")}</h2>
+    list.innerHTML = filtered.map(item => {
+      const category = categoryNames[item.category] || "🎁 Розыгрыш";
 
-        <div class="source">
-          ${escapeHtml(item.url || "")}
-        </div>
+      return `
+        <div class="card">
+          <div class="badge">${category}</div>
 
-        <div class="buttons">
+          <h2>${escapeHtml(item.title || "Розыгрыш")}</h2>
+
+          <div class="date">
+            ${formatDate(item.end_date)}
+          </div>
+
+          <div class="source">
+            Источник: ${escapeHtml(item.source || "Публичный источник")}
+          </div>
+
           <a
             class="participate"
             href="${escapeAttr(item.url || "#")}"
@@ -249,27 +220,9 @@
           >
             Участвовать
           </a>
-
-          <button
-            class="done"
-            onclick="markDone(${index})"
-          >
-            ✓ Я участвовал
-          </button>
         </div>
-      </div>
-    `).join("");
-  }
-
-  function markDone(index) {
-    const buttons = document.querySelectorAll(".done");
-    if (buttons[index]) {
-      buttons[index].classList.toggle("active");
-      buttons[index].textContent =
-        buttons[index].classList.contains("active")
-          ? "✓ Участвовал"
-          : "✓ Я участвовал";
-    }
+      `;
+    }).join("");
   }
 
   function escapeHtml(text) {
@@ -291,13 +244,26 @@
   fetch("giveaways.json?time=" + Date.now())
     .then(response => {
       if (!response.ok) {
-        throw new Error("Не удалось загрузить giveaways.json");
+        throw new Error("Ошибка загрузки");
       }
-
       return response.json();
     })
     .then(data => {
       giveaways = Array.isArray(data) ? data : [];
+
+      // Ближайшие даты окончания — сверху
+      giveaways.sort((a, b) => {
+        const dateA = a.end_date
+          ? new Date(a.end_date).getTime()
+          : Infinity;
+
+        const dateB = b.end_date
+          ? new Date(b.end_date).getTime()
+          : Infinity;
+
+        return dateA - dateB;
+      });
+
       render();
     })
     .catch(error => {
@@ -305,8 +271,7 @@
 
       list.innerHTML = `
         <div class="empty">
-          ⚠️ Не удалось загрузить розыгрыши.<br><br>
-          Попробуйте открыть приложение немного позже.
+          ⚠️ Не удалось загрузить розыгрыши
         </div>
       `;
     });
@@ -317,7 +282,7 @@
     button.addEventListener("click", () => {
       document
         .querySelectorAll(".category")
-        .forEach(item => item.classList.remove("active"));
+        .forEach(b => b.classList.remove("active"));
 
       button.classList.add("active");
       currentCategory = button.dataset.category;
