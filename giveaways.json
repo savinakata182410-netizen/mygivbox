@@ -1,13 +1,5 @@
 [
   {
-    "title": "1 сентября начинается с подарков! Поздравляем с началом нового учебного года! 💚 Пусть этой осенью будет побольше приятных событий, новых ...",
-    "category": "cosmetics",
-    "category_name": "💄 Косметика",
-    "end_date": "2026-09-30",
-    "source": "@PrizeTech",
-    "url": "https://t.me/PrizeTech/5818"
-  },
-  {
     "title": "Разыгрываем кофеварку бренда премиальной бытовой техники VÄRD (можно будет выбрать любой из четырех цветов в линейке!) Элегантная рожкова...",
     "category": "games",
     "category_name": "🎮 Игры",
@@ -30,6 +22,30 @@
     "end_date": "2026-09-30",
     "source": "@PrizeTech",
     "url": "https://t.me/PrizeTech/5829"
+  },
+  {
+    "title": "🎁 Дарим ручной инструмент DongCheng! По многочисленным просьбам решили повторить конкурс с набором ручного инструмента DongCheng.",
+    "category": "clothes",
+    "category_name": "👗 Одежда",
+    "end_date": "2026-09-30",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5836"
+  },
+  {
+    "title": "⚡ РОЗЫГРЫШ DOTA2.EXE X TEAM YANDEX НА 50 ПОБЕДИТЕЛЕЙ 🕹 В честь старта партнерства .EXE MEDIA и TEAM YANDEX мы запускаем наш самый масштаб...",
+    "category": "tech",
+    "category_name": "📱 Техника",
+    "end_date": "2026-09-30",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5837"
+  },
+  {
+    "title": "За окном всё чаще серо и дождливо. Самое время добавить красок на свою кухню. 🍁 Мы разыгрываем аэрогриль Tefal Easy Fry Pop",
+    "category": "money",
+    "category_name": "💰 Деньги",
+    "end_date": "2026-09-30",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5838"
   },
   {
     "title": "Подарки от Sektaschool x Альпина нон-фикшн 🎁 Разыгрываем 3 набора эффективных инструментов для формирования сильного мышечного каркаса:",
@@ -64,20 +80,20 @@
     "url": "https://t.me/ra4lck73/3910"
   },
   {
-    "title": "⚡️ Разыгрываем больше 60 призов вместе с Lunacy — от клавиатур и мышек до лимитированного кастома. Среди призов: Lunacy × AKKO Black Pearl",
-    "category": "other",
-    "category_name": "🎁 Другое",
-    "end_date": "2026-10-01",
-    "source": "@PrizeTech",
-    "url": "https://t.me/PrizeTech/5821"
-  },
-  {
     "title": "🎁 РОЗЫГРЫШ ПОДАРКОВ ОТ APPLE DISCOUNT 🎁 Разыгрываем сразу 5 призов среди наших подписчиков! 🥇 1 место — AirPods 4 🥈 2 место — Яндекс Стан...",
     "category": "tech",
     "category_name": "📱 Техника",
     "end_date": "2026-10-01",
     "source": "@PrizeTech",
     "url": "https://t.me/PrizeTech/5832"
+  },
+  {
+    "title": "🎉 РОЗЫГРЫШ iPhone 18 Pro Max 1TB! 🎉 Разыгрываем топовый флагман в самом желанном цвете 2026 года! 📱 ✨ В этом розыгрыше всё честно: ты сам...",
+    "category": "tech",
+    "category_name": "📱 Техника",
+    "end_date": "2026-10-01",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5844"
   },
   {
     "title": "❤️ Ты готов показать свой лучший наряд? Вместе с Московской неделей моды дарим пригласительные на показы дизайнеров в ЦВЗ «Манеж».",
@@ -110,6 +126,14 @@
     "end_date": "2026-10-02",
     "source": "@PrizeTech",
     "url": "https://t.me/PrizeTech/5822"
+  },
+  {
+    "title": "🎁 Мы разыгрываем среди подписчиков iPhone 17 Pro Max — условия для участия максимально простые. 1️⃣ Надо подписаться на @moscowmi",
+    "category": "tech",
+    "category_name": "📱 Техника",
+    "end_date": "2026-10-02",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5843"
   },
   {
     "title": "Розыгрыш! 🎁 Пятница — отличный повод подарить кому-нибудь кофе! На этой неделе разыгрываем Peru Elias Caceres, наш кофе недели под фильтр...",
@@ -344,28 +368,12 @@
     "url": "https://t.me/ra4lck73/3895"
   },
   {
-    "title": "⚡️ ⚡️ Перезапускаем розыгрыш наушников Дропс с Алисой AI вместе с друзьями из Яндекса! Вчерашний конкурс столкнулся с техническими сбоями...",
-    "category": "tech",
-    "category_name": "📱 Техника",
-    "end_date": "2026-10-08",
-    "source": "@PrizeTech",
-    "url": "https://t.me/PrizeTech/5812"
-  },
-  {
     "title": "Дарим захватывающую историю о смелости, семейных тайнах и силе воспоминаний: Кейт Гилби Смит «Оливия Джонс и похититель воспоминаний»",
     "category": "games",
     "category_name": "🎮 Игры",
     "end_date": "2026-10-08",
     "source": "@dvigeq",
     "url": "https://t.me/dvigeq/6581"
-  },
-  {
-    "title": "⚡️ 🚘 TOYOTA CAMRY+2000 СЕРТИФИКАТОВ OZON 🛒 ⚡️ 🚀 За 3 года мы подарили 45 автомобилей , а за последние 3 месяца — уже 10 из них",
-    "category": "auto",
-    "category_name": "🚗 Авто",
-    "end_date": "2026-10-09",
-    "source": "@PrizeTech",
-    "url": "https://t.me/PrizeTech/5810"
   },
   {
     "title": "⚡️ 🚘 TOYOTA CAMRY+2000 СЕРТИФИКАТОВ OZON 🛒 ⚡️ 🚀 За 3 года мы подарили 45 автомобилей, а за последние 3 месяца — уже 10 из них! И это не п...",
@@ -416,6 +424,14 @@
     "url": "https://t.me/PrizeTech/5830"
   },
   {
+    "title": "ДАРИМ КОЛОНКУ С АЛИСОЙ И ЗАПАС ХИМИИ НА СЕЗОН 🔥 Умный быт с Dutybox – это легко! Разыгрываем колонку с Алисой, сертификаты Ozon и набор к...",
+    "category": "food",
+    "category_name": "🍔 Еда",
+    "end_date": "2026-10-16",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5841"
+  },
+  {
     "title": "КОНКУРС! Дарим чайник SMEG или 20.000₽ { Условия участия } • подписаться на наши каналы: Julie vivêtements by maru with soul",
     "category": "money",
     "category_name": "💰 Деньги",
@@ -454,5 +470,13 @@
     "end_date": "2026-10-31",
     "source": "@PrizeTech",
     "url": "https://t.me/PrizeTech/5827"
+  },
+  {
+    "title": "⚡️ ОГРОМНЫЙ РОЗЫГРЫШ В ЧЕСТЬ CHAMPIONS SHANGHAI 2026 НА 100 МЕСТ Главный турнир года уже стартовал — это значит, что пора запускать главн...",
+    "category": "other",
+    "category_name": "🎁 Другое",
+    "end_date": "2026-11-01",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5839"
   }
 ]
