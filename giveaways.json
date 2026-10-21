@@ -120,14 +120,6 @@
     "url": "https://t.me/vezuchiytakoi/21936"
   },
   {
-    "title": "🎮 Ситилинк × Бустер: 52 приза — 52 победителя Для участия : 🟠 Подпишитесь на канал Бустера 🟠 Подпишитесь на канал Ситилинка",
-    "category": "money",
-    "category_name": "💰 Деньги",
-    "end_date": "2026-10-26",
-    "source": "@PrizeTech",
-    "url": "https://t.me/PrizeTech/5919"
-  },
-  {
     "title": "🎉 Внимание, конкурс в нашем Telegram-канале 🎉 Встречайте новинку — бурбон Nucky Thompson Bourbon Whiskey! В нём — характер и стиль: в аро...",
     "category": "cosmetics",
     "category_name": "💄 Косметика",
@@ -174,6 +166,14 @@
     "end_date": "2026-10-27",
     "source": "@vezuchiytakoi",
     "url": "https://t.me/vezuchiytakoi/21940"
+  },
+  {
+    "title": "Конкурс 🎁 Разыгрываем 5 подарочных боксов с инновационной серией PDRN ! Мы подготовили для вас особенный подарок — боксы с главной антиво...",
+    "category": "tech",
+    "category_name": "📱 Техника",
+    "end_date": "2026-10-27",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5948"
   },
   {
     "title": "Дарим ОГРОМНЫЕ боксы с косметикой для осеннего макияжа 🍂 ✨ Впереди много праздников и вечеринок, на которых нужно сиять. Мы поможем!",
@@ -264,6 +264,14 @@
     "url": "https://t.me/ra4lck73/4064"
   },
   {
+    "title": "Новый iPhone 18 Pro Max или идеальный костюм? Решит удача 🩵 В честь Дня отца объединились со STOIC, чтобы подарить сразу двум победителям...",
+    "category": "tech",
+    "category_name": "📱 Техника",
+    "end_date": "2026-11-02",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5952"
+  },
+  {
     "title": "У нас розыгрыш! 🎁 У каждой фотографии с мамой - своя история. Поделитесь той, которая особенно дорога вам ❤️ В рамках кампании",
     "category": "auto",
     "category_name": "🚗 Авто",
@@ -288,28 +296,12 @@
     "url": "https://t.me/dvigeq/6634"
   },
   {
-    "title": "😀 😃 😄 😁 😆 Розыгрыш PlayStation 5 Pro, PlayStation 5 и GTA VI 1 место — Sony PlayStation 5 Pro 2 место — Sony PlayStation 5",
-    "category": "tech",
-    "category_name": "📱 Техника",
-    "end_date": "2026-11-12",
-    "source": "@PrizeTech",
-    "url": "https://t.me/PrizeTech/5927"
-  },
-  {
     "title": "РОЗЫГРЫШ PROLAB BEAUTY × LABORATORIA COFFEE ❤️ Любимый кофе и уход за собой — утро, на которое хочется оставить чуть больше времени",
     "category": "cosmetics",
     "category_name": "💄 Косметика",
     "end_date": "2026-11-15",
     "source": "@coffeesession",
     "url": "https://t.me/coffeesession/1510"
-  },
-  {
-    "title": "🤔 Хочешь обновить сетап? Тогда участвуй в розыгрыше, в котором ты можешь выиграть: 😍 AndaSeat Kaiser 4 V2 XL 🫥 MSI MAG 272QP",
-    "category": "money",
-    "category_name": "💰 Деньги",
-    "end_date": "2026-11-16",
-    "source": "@PrizeTech",
-    "url": "https://t.me/PrizeTech/5920"
   },
   {
     "title": "Большой розыгрыш Каждое 16-е число месяца мы дарим подарки от The Act. 🐚 1-е место — набор скрабов для тела / печенье и шоколад",
@@ -326,5 +318,13 @@
     "end_date": "2026-11-20",
     "source": "@PrizeTech",
     "url": "https://t.me/PrizeTech/5930"
+  },
+  {
+    "title": "Дарим ТОПОВОЕ издание GTA VI сразу с PS5 😳 Собрали бандл из Ultimate-версии игры и мощнейшей консоли для 10 победителей!",
+    "category": "tech",
+    "category_name": "📱 Техника",
+    "end_date": "2026-11-20",
+    "source": "@PrizeTech",
+    "url": "https://t.me/PrizeTech/5951"
   }
 ]
